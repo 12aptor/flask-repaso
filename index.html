@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Mi pagina web</h1>
+    <button id="registrar">Registrar</button>
+  </body>
+  <script>
+    const product = {
+      name: "Zapatillas Pumba",
+      description: "Zapatilla urbana talla 42",
+      price: 200.0,
+      image: "http://imagen.com/zatilla",
+      stock: 50,
+      category_id: 1,
+    };
+
+    const category = {
+      name: "Calzados",
+    };
+
+    const getData = async () => {
+      const response = await fetch("http://127.0.0.1:5001/categories/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(category),
+      });
+      const json = await response.json();
+      console.log(json);
+    };
+
+    const registrar = document.getElementById("registrar");
+
+    registrar.addEventListener("click", () => {
+      fetch("http://127.0.0.1:5001/categories/list", {
+        // method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // body: JSON.stringify(product),
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+    });
+  </script>
+</html>
